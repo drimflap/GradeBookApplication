@@ -18,10 +18,10 @@ namespace GradeBook.GradeBooks
                 throw new InvalidOperationException("Ranked grading requires at least 5 students.");
             }
 
-            var allGrades = Students.SelectMany(s => s.Grades).ToList();
+            var studentAverages = Students.Select(s => s.Grades.Average()).ToList();
 
-            int studentRank = allGrades.Count(g => g > averageGrade);
-            double percentile = (double)studentRank / allGrades.Count;
+            int studentRank = studentAverages.Count(g => g >= averageGrade);
+            double percentile = (double)studentRank / studentAverages.Count;
 
             if (percentile <= 0.2) return 'A';
             if (percentile <= 0.4) return 'B';
