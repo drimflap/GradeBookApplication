@@ -18,7 +18,7 @@ namespace GradeBook.GradeBooks
                 throw new InvalidOperationException("Ranked grading requires at least 5 students.");
             }
 
-            var allGrades = Students.SelectMany(s => s.Grades).OrderByDescending(g => g).ToList();
+            var allGrades = Students.SelectMany(s => s.Grades).ToList();
 
             int studentRank = allGrades.Count(g => g > averageGrade);
             double percentile = (double)studentRank / allGrades.Count;
